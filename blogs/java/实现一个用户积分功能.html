@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>实现一个用户积分功能 | 蒋延龙博客</title>
+    <meta name="generator" content="VuePress 1.9.9">
+    <link rel="icon" href="/boke/logo.jpg">
+    <meta name="description" content="蒋延龙的博客">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/boke/assets/css/0.styles.18a8666a.css" as="style"><link rel="preload" href="/boke/assets/js/app.c3ffbfc1.js" as="script"><link rel="preload" href="/boke/assets/js/3.7e2ad150.js" as="script"><link rel="preload" href="/boke/assets/js/1.ea382386.js" as="script"><link rel="preload" href="/boke/assets/js/36.38aa9873.js" as="script"><link rel="prefetch" href="/boke/assets/js/10.a841755a.js"><link rel="prefetch" href="/boke/assets/js/11.61039121.js"><link rel="prefetch" href="/boke/assets/js/12.22a8feeb.js"><link rel="prefetch" href="/boke/assets/js/13.7f35477b.js"><link rel="prefetch" href="/boke/assets/js/14.56b56d84.js"><link rel="prefetch" href="/boke/assets/js/15.0ea4a0bb.js"><link rel="prefetch" href="/boke/assets/js/16.e0f1d5da.js"><link rel="prefetch" href="/boke/assets/js/17.3283faf1.js"><link rel="prefetch" href="/boke/assets/js/18.10f08bfe.js"><link rel="prefetch" href="/boke/assets/js/19.890e94d4.js"><link rel="prefetch" href="/boke/assets/js/20.08fe8e6b.js"><link rel="prefetch" href="/boke/assets/js/21.2a4a7512.js"><link rel="prefetch" href="/boke/assets/js/22.85c4f52a.js"><link rel="prefetch" href="/boke/assets/js/23.1f560357.js"><link rel="prefetch" href="/boke/assets/js/24.1ecaaeac.js"><link rel="prefetch" href="/boke/assets/js/25.b649d62e.js"><link rel="prefetch" href="/boke/assets/js/26.5b173579.js"><link rel="prefetch" href="/boke/assets/js/27.fe05f621.js"><link rel="prefetch" href="/boke/assets/js/28.f4783ae4.js"><link rel="prefetch" href="/boke/assets/js/29.2dfa1f24.js"><link rel="prefetch" href="/boke/assets/js/30.8f086afb.js"><link rel="prefetch" href="/boke/assets/js/31.906a9aa3.js"><link rel="prefetch" href="/boke/assets/js/32.2a71556e.js"><link rel="prefetch" href="/boke/assets/js/33.63c570fe.js"><link rel="prefetch" href="/boke/assets/js/34.54829011.js"><link rel="prefetch" href="/boke/assets/js/35.b23239d3.js"><link rel="prefetch" href="/boke/assets/js/37.4cf3d553.js"><link rel="prefetch" href="/boke/assets/js/38.5f316834.js"><link rel="prefetch" href="/boke/assets/js/39.0cd16aa7.js"><link rel="prefetch" href="/boke/assets/js/4.22cc5835.js"><link rel="prefetch" href="/boke/assets/js/40.c6aed0c3.js"><link rel="prefetch" href="/boke/assets/js/41.a2b6950b.js"><link rel="prefetch" href="/boke/assets/js/42.1bcb072c.js"><link rel="prefetch" href="/boke/assets/js/5.c5ecefeb.js"><link rel="prefetch" href="/boke/assets/js/6.407ca9de.js"><link rel="prefetch" href="/boke/assets/js/7.42e9c35c.js"><link rel="prefetch" href="/boke/assets/js/8.4ac4fa77.js"><link rel="prefetch" href="/boke/assets/js/9.6494bc00.js">
+    <link rel="stylesheet" href="/boke/assets/css/0.styles.18a8666a.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-2d5f533b><div data-v-2d5f533b><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-2d5f533b data-v-2d5f533b><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-64685f0e data-v-2d5f533b data-v-2d5f533b><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>蒋延龙博客</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>jiangyanlong</span>
+            
+          <!---->
+          2023
+        </a></span></div></div> <div class="hide" data-v-2d5f533b><header class="navbar" data-v-2d5f533b><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/boke/" class="home-link router-link-active"><img src="https://www.weicounty.xyz/img/logo.png" alt="蒋延龙博客" class="logo"> <span class="site-name">蒋延龙博客</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/boke/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      目录索引
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/boke/categories/ChatGpt相关/" class="nav-link"><i class="iconfont undefined"></i>
+  ChatGpt相关
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Linux/" class="nav-link"><i class="iconfont undefined"></i>
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Git/" class="nav-link"><i class="iconfont undefined"></i>
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/GoLang/" class="nav-link"><i class="iconfont undefined"></i>
+  GoLang
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Java/" class="nav-link"><i class="iconfont undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Java Bug收录/" class="nav-link"><i class="iconfont undefined"></i>
+  Java Bug收录
+</a></li></ul></div></div><div class="nav-item"><a href="/boke/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签索引
+</a></div><div class="nav-item"><a href="/boke/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div><div class="nav-item"><a href="/boke/blogs/views/messageBoard.html" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://gitee.com/along1234" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-mayun"></i>
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-2d5f533b></div> <aside class="sidebar" data-v-2d5f533b><div class="personal-info-wrapper" data-v-ca798c94 data-v-2d5f533b><img src="https://www.weicounty.xyz/img/logo.png" alt="author-avatar" class="personal-img" data-v-ca798c94> <h3 class="name" data-v-ca798c94>
+    jiangyanlong
+  </h3> <div class="num" data-v-ca798c94><div data-v-ca798c94><h3 data-v-ca798c94>31</h3> <h6 data-v-ca798c94>Article</h6></div> <div data-v-ca798c94><h3 data-v-ca798c94>7</h3> <h6 data-v-ca798c94>Tag</h6></div></div> <hr data-v-ca798c94></div> <nav class="nav-links"><div class="nav-item"><a href="/boke/" class="nav-link"><i class="iconfont reco-home"></i>
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      目录索引
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/boke/categories/ChatGpt相关/" class="nav-link"><i class="iconfont undefined"></i>
+  ChatGpt相关
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Linux/" class="nav-link"><i class="iconfont undefined"></i>
+  Linux
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Git/" class="nav-link"><i class="iconfont undefined"></i>
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/GoLang/" class="nav-link"><i class="iconfont undefined"></i>
+  GoLang
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Java/" class="nav-link"><i class="iconfont undefined"></i>
+  Java
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/MySQL/" class="nav-link"><i class="iconfont undefined"></i>
+  MySQL
+</a></li><li class="dropdown-item"><!----> <a href="/boke/categories/Java Bug收录/" class="nav-link"><i class="iconfont undefined"></i>
+  Java Bug收录
+</a></li></ul></div></div><div class="nav-item"><a href="/boke/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签索引
+</a></div><div class="nav-item"><a href="/boke/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  时间线
+</a></div><div class="nav-item"><a href="/boke/blogs/views/messageBoard.html" class="nav-link"><i class="iconfont reco-suggestion"></i>
+  留言板
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://gitee.com/along1234" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-mayun"></i>
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-64685f0e data-v-2d5f533b><h3 class="title" style="display:none;" data-v-64685f0e data-v-64685f0e>实现一个用户积分功能</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-64685f0e data-v-64685f0e><input type="password" value="" data-v-64685f0e> <span data-v-64685f0e>Konck! Knock!</span> <button data-v-64685f0e>OK</button></label> <div class="footer" style="display:none;" data-v-64685f0e data-v-64685f0e><span data-v-64685f0e><i class="iconfont reco-theme" data-v-64685f0e></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-64685f0e>vuePress-theme-reco</a></span> <span data-v-64685f0e><i class="iconfont reco-copyright" data-v-64685f0e></i> <a data-v-64685f0e><span data-v-64685f0e>jiangyanlong</span>
+            
+          <!---->
+          2023
+        </a></span></div></div> <div data-v-2d5f533b><main class="page"><div class="page-title" style="display:none;"><h1 class="title">实现一个用户积分功能</h1> <div data-v-3b7f5bdf><i class="iconfont reco-account" data-v-3b7f5bdf><span data-v-3b7f5bdf>jiangyanlong</span></i> <i class="iconfont reco-date" data-v-3b7f5bdf><span data-v-3b7f5bdf>2022-09-26</span></i> <i class="iconfont reco-eye" data-v-3b7f5bdf><span id="/boke/blogs/java/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7%E7%A7%AF%E5%88%86%E5%8A%9F%E8%83%BD.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-3b7f5bdf><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="iconfont reco-tag tags" data-v-3b7f5bdf><span class="tag-item" data-v-3b7f5bdf>Java</span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h1 id="实现一个用户积分功能"><a href="#实现一个用户积分功能" class="header-anchor">#</a> 实现一个用户积分功能</h1> <h3 id="需求"><a href="#需求" class="header-anchor">#</a> 需求：</h3> <p>用户通过签到、活动、下单等渠道获取积分，积分30天后过期(可配置)。用户下单可以使用积分抵扣金额，优先使用快过期的积分，但当订单取消后，积分也要原路退回。</p> <h3 id="需求分析"><a href="#需求分析" class="header-anchor">#</a> 需求分析：</h3> <p>积分过期：需要存储每一次用户获取积分的项目，比如签到获取10积分，过期时间是2023-04-30 12:00:00。这样每个积分项都有不同的过期时间记录，来做到对不同时间获取积分的过期操作。</p> <p>积分使用：先使用最快要过期的积分，那么就需要积分项按照过期时间排序再消费。例如用户签到10天获取到100积分，属于10个积分项，用户下单使用40积分，那么需要消费最先过期的4个积分项中的40积分。</p> <p>积分退还：用户下单使用100积分，是用户签到10天获取到的，属于10个积分项，拥有不同的过期时间。退还时要把这100个积分拆成10个退还到不同的过期时间的积分项中。需要存储每次使用积分的记录id和积分项id,做到积分的退还。</p> <h3 id="表设计"><a href="#表设计" class="header-anchor">#</a> 表设计：</h3> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token keyword">create</span> <span class="token keyword">table</span> member
+<span class="token punctuation">(</span>
+    id           <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'id'</span><span class="token punctuation">,</span>
+    user_id      <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'用户id'</span><span class="token punctuation">,</span>
+    total_point  <span class="token keyword">int</span>           <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'总积分'</span><span class="token punctuation">,</span>
+    avail_point  <span class="token keyword">int</span>           <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'可用积分'</span><span class="token punctuation">,</span>
+    expire_point <span class="token keyword">int</span>           <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'过期积分'</span>
+    <span class="token keyword">constraint</span> id
+        <span class="token keyword">unique</span> <span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword">constraint</span> unq_user_id
+        <span class="token keyword">unique</span> <span class="token punctuation">(</span>user_id<span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+    <span class="token keyword">comment</span> <span class="token string">'会员表'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">create</span> <span class="token keyword">table</span> member_point_item
+<span class="token punctuation">(</span>
+    id           <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'id'</span>
+        <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+    user_id      <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'用户id'</span><span class="token punctuation">,</span>
+    <span class="token keyword">point</span>        <span class="token keyword">int</span>           <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'积分值'</span><span class="token punctuation">,</span>
+    expire_point <span class="token keyword">int</span> <span class="token keyword">default</span> <span class="token number">0</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'过期积分'</span><span class="token punctuation">,</span>
+    source_id    <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'来源id 例如活动id'</span><span class="token punctuation">,</span>
+    <span class="token keyword">status</span>       <span class="token keyword">smallint</span>      <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'状态 1:正常 2:用光 3:过期'</span>
+<span class="token punctuation">)</span>
+    <span class="token keyword">comment</span> <span class="token string">'会员积分项'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">create</span> <span class="token keyword">table</span> member_point_record
+<span class="token punctuation">(</span>
+    id          <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'id'</span>
+        <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+    user_id     <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'用户id'</span><span class="token punctuation">,</span>
+    source_id   <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span>   <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'来源id(例如订单id)'</span><span class="token punctuation">,</span>
+    <span class="token keyword">point</span>       <span class="token keyword">int</span>           <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'积分值'</span><span class="token punctuation">,</span>
+    <span class="token keyword">type</span>        <span class="token keyword">smallint</span>      <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'类型 1:签到  2:订单抵扣 3:过期'</span>
+<span class="token punctuation">)</span>
+    <span class="token keyword">comment</span> <span class="token string">'会员积分记录'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">create</span> <span class="token keyword">table</span> member_point_record_relation
+<span class="token punctuation">(</span>
+    id        <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'id'</span>
+        <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+    record_id <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'记录id'</span><span class="token punctuation">,</span>
+    point_id  <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">36</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'用户积分项id'</span><span class="token punctuation">,</span>
+    use_point <span class="token keyword">int</span>         <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'使用积分数'</span><span class="token punctuation">,</span>
+    <span class="token keyword">status</span>        <span class="token keyword">smallint</span>    <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">comment</span> <span class="token string">'状态 1:抵扣  2:返还'</span>
+  
+<span class="token punctuation">)</span>
+    <span class="token keyword">comment</span> <span class="token string">'会员积分项与记录关系表'</span><span class="token punctuation">;</span>
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br></div></div><p>member：存储用户的总积分，可用积分，过期积分。</p> <p>member_point_item：存储用户积分项，记录不同的过期时间、</p> <p>member_point_record：存储用户获得，使用，过期积分记录。</p> <p>member_point_record_relation：存储记录使用到的积分项关系，用来实现用户积分原路退回。</p> <h3 id="问题"><a href="#问题" class="header-anchor">#</a> 问题：</h3> <p>由于用户获取积分时间不同，用户积分项可能数据较多，且积分数较小。例如100条获取1积分的积分项记录，标识用户拥有100积分，这100积分拥有不同的过期时间。使用时需要扣除这100条记录的积分，需要修改100条记录。</p> <h3 id="解决方案"><a href="#解决方案" class="header-anchor">#</a> 解决方案：</h3> <ul><li><p>产品层面：跟产品battle，让他改成按小时过期，按日过期、按月过期，增大积分项的过期粒度，同时控制积分过期时间。减少使用积分时需要操作的积分项记录数。（可能battle不过）</p></li> <li><p>异步做：先扣减用户积分额度，异步做积分项的积分使用。</p></li></ul> <p>下面简单放一下获得积分、扣减积分、退还积分的代码</p> <h3 id="获得积分"><a href="#获得积分" class="header-anchor">#</a> 获得积分：</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>/**
+* 用户获取积分
+*
+* @param req 积分获取类
+*/
+@Override
+@Transactional(rollbackFor = Exception.class)
+public void create(MemberPointCreateDTO req) {
+    //获取到的积分
+    int point = req.getPoint();
+    //用户id
+    String userId = UserUtil.handleUserId();
+
+    //生成积分记录，简单的存储member_point_record表操作
+    memberPointRecordManager.create(userId, point, req.getType(), req.getSourceId());
+
+    //存储用户积分项，简单的存储member_point_item表操作
+    create(userId, point);
+
+    //更新member用户积分
+    memberService.addUserPoint(userId, point);
+}
+
+//更新member用户积分
+public void addUserPoint(String userId, int point) {
+    LambdaUpdateWrapper&lt;Member&gt; updateWrapper = new LambdaUpdateWrapper&lt;&gt;();
+    updateWrapper.eq(Member::getUserId, userId)
+        .setSql(&quot;total_point = total_point + &quot; + point)
+        .setSql(&quot;avail_point = avail_point + &quot; + point);
+
+    this.update(updateWrapper);
+}
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br></div></div><h3 id="扣减积分"><a href="#扣减积分" class="header-anchor">#</a> 扣减积分</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code> /**
+ * 消费积分
+ *
+ * @param req 积分消费类
+ */
+@Override
+@Transactional(rollbackFor = Exception.class)
+@RedissonLock(name = &quot;member:point&quot;, key = &quot;#req.userId&quot;)
+public void consume(MemberPointConsumeDTO req) {
+    //获取用户积分判断积分是否足够消费
+    Member member = memberService.getByUserId(req.getUserId());
+
+    //用户积分不足
+    if (member.getAvailPoint() &lt; req.getPoint()) {
+        throw MemberException.buildServiceException(MemberExceptionResponseCode.POINT_NOT_ENOUGH);
+    }
+
+    //要花费的总积分
+    Integer totalPoint = req.getPoint();
+
+    //扣减用户积分
+    memberService.consumeUserPoint(req.getUserId(), req.getPoint());
+
+    //生成积分记录
+    MemberPointRecord record = memberPointRecordManager.create(req.getUserId(), req.getPoint(), req.getType(), req.getSourceId());
+
+    //扣减用户积分项
+    handleUserPointItemDeduct(req.getPoint(), req.getUserId(), record.getId());
+}
+
+
+/**
+ * 扣减用户积分
+ * @param userId 用户id
+ * @param point 积分
+ */
+@Override
+public boolean consumeUserPoint(String userId, int point) {
+    LambdaUpdateWrapper&lt;Member&gt; updateWrapper = new LambdaUpdateWrapper&lt;&gt;();
+    updateWrapper.eq(Member::getUserId, userId)
+        .setSql(&quot;avail_point = avail_point - &quot; + point)
+        .ge(Member::getAvailPoint, point);
+
+    return this.update(updateWrapper);
+}
+
+
+/**
+ * 扣减用户积分项
+ *
+ * @param totalPoint 要花费的总积分
+ * @param userId     用户id
+ * @param recordId   记录id
+ */
+private void handleUserPointItemDeduct(Integer totalPoint, String userId, String recordId) {
+    //查询用户积分项按过期时间排序
+    List&lt;MemberPointItem&gt; memberPointItems = memberPointItemService.getByUserIdOrderAscByExpireTime(userId);
+
+    //遍历用户积分项，扣减积分
+    List&lt;MemberPointRecordRelation&gt; relations = new ArrayList&lt;&gt;();
+    List&lt;MemberPointItem&gt; updatePoints = new ArrayList&lt;&gt;();
+    for (MemberPointItem item : memberPointItems) {
+        if (totalPoint &lt;= 0) {
+            break;
+        }
+
+        //当前积分项需要使用的积分
+        int usePoint;
+
+        //如果需要使用的积分大于当前积分项
+        if (totalPoint &gt;= item.getPoint()) {
+            totalPoint -= item.getPoint();
+            //使用到的积分为积分项的积分数
+            usePoint = item.getPoint();
+            item.setPoint(0);
+            //设置积分项状态为用光
+            item.setStatus(MemberPointItemStatusEnum.EXHAUSTED.getValue());
+        } else {
+            //剩余积分
+            int remainPoint = item.getPoint() - totalPoint;
+            //使用到的积分为剩余的花费积分数
+            usePoint = totalPoint;
+            //设置剩余积分
+            item.setPoint(remainPoint);
+            totalPoint = 0;
+        }
+
+        //创建关联记录实体类，为了实现积分退还功能，简单的member_point_record_relation表的入库操作
+        MemberPointRecordRelation relation = handleCreatePointRecordRelationDO(item.getId(), recordId, usePoint);
+        relations.add(relation);
+        updatePoints.add(item);
+    }
+
+    //存储
+    memberPointItemService.updateBatchById(updatePoints, 100);
+    memberPointRecordRelationService.saveBatch(relations, 100);
+}
+
+
+/**
+ * 查询用户积分项按过期时间排序
+ * @param userId 用户id
+ */
+public List&lt;MemberPointItem&gt; getByUserIdOrderAscByExpireTime(String userId) {
+    LambdaQueryWrapper&lt;MemberPointItem&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+    queryWrapper.eq(MemberPointItem::getUserId, userId)
+        //查询状态是可以使用的积分项
+        .eq(MemberPointItem::getStatus, MemberPointItemStatusEnum.NORMAL.getValue());
+    queryWrapper.orderByAsc(MemberPointItem::getExpireTime);
+    return memberPointItemMapper.selectList(queryWrapper);
+}
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br></div></div><h3 id="退还积分"><a href="#退还积分" class="header-anchor">#</a> 退还积分</h3> <div class="language- line-numbers-mode"><pre class="language-text"><code>/**
+ * 根据订单号退还积分
+ *
+ * @param orderId 订单号
+ */
+@Override
+@Transactional(rollbackFor = Exception.class)
+@RedissonLock(name = &quot;member:point&quot;, key = &quot;#userId&quot;)
+public void refund(String userId, String orderId) {
+    //根据订单id查询记录
+    MemberPointRecord pointRecord = memberPointRecordManager.getByOrderId(orderId);
+    if (Objects.isNull(pointRecord)) {
+        throw MemberException.buildServiceException(MemberExceptionResponseCode.ORDER_NOT_POINT_DEDUCT);
+    }
+    //生成退还记录
+    memberPointRecordManager.create(pointRecord.getUserId(), pointRecord.getPoint(), MemberPointTypeEnums.REFUND.getValue(), orderId);
+
+    //根据积分记录退还积分
+    refundPoint(pointRecord);
+}
+
+
+/**
+ * 根据积分记录退还积分
+ *
+ * @param pointRecord 积分记录
+ */
+public void refundPoint(MemberPointRecord pointRecord) {
+    //根据记录id查询该记录都花费了哪些积分，并退回
+    List&lt;MemberPointRecordRelation&gt; relations = memberPointRecordRelationService.getByRecordId(pointRecord.getId());
+    Map&lt;String, MemberPointRecordRelation&gt; relationMap = relations.stream().collect(Collectors.toMap(MemberPointRecordRelation::getPointItemId, Function.identity()));
+    Set&lt;String&gt; pointIds = relations.stream().map(MemberPointRecordRelation::getPointItemId).collect(Collectors.toSet());
+
+    //查询使用过的积分项
+    List&lt;MemberPointItem&gt; memberPointItems = memberPointItemService.listByIds(pointIds);
+
+    for (MemberPointItem item : memberPointItems) {
+        MemberPointRecordRelation relation = relationMap.get(item.getId());
+        //更新关系表状态为返还
+        relation.setStatus(MemberPointRecordRelationTypeEnum.REFUND.getValue());
+        //积分项积分加回使用掉的积分
+        item.setPoint(item.getPoint() + relation.getUsePoint());
+        //如果状态是不是正常，那么更新状态为正常
+        if (!Objects.equals(item.getStatus(), MemberPointItemStatusEnum.NORMAL.getValue())) {
+            item.setStatus(MemberPointItemStatusEnum.NORMAL.getValue());
+        }
+
+        //过期积分处理，状态设置为已过期，生成积分过期记录
+        ...
+    }
+
+    memberPointItemService.updateBatchById(memberPointItems, 100);
+    memberPointRecordRelationService.updateBatchById(relations, 100);
+
+    //加回用户积分
+    memberService.refundUserPoint(pointRecord.getUserId(), pointRecord.getPoint());
+}
+
+
+@Override
+public void refundUserPoint(String userId, int point) {
+    LambdaUpdateWrapper&lt;Member&gt; updateWrapper = new LambdaUpdateWrapper&lt;&gt;();
+    updateWrapper.eq(Member::getUserId, userId)
+            .setSql(&quot;avail_point = avail_point + &quot; + point);
+
+    this.update(updateWrapper);
+}
+复制代码
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br></div></div><p>在功能实现时，会有并发问题，可能会造成少消费，多退还等问题，这时候就需要加锁来解决了。</p> <blockquote><p>@RedissonLock是自定义的一个分布式锁的切面，网上的实现也比较多。在使用时需要注意与@Transactional之间的顺序问题。如果分布式锁比事务先一步释放，那么另一线程得到分布式锁进入方法，由于上一线程的事务还未提交，得到的数据还是未提交时的数据，读取的数据并不是最新的。分布式锁的使用也就出现了问题。@Transactional的Order为Ordered.LOWEST_PRECEDENCE，即最低优先级，只要保证@Order的值比它小即可。同样也要考虑一下锁的租期问题，如果在锁的租期内方法没有完成，第二个线程同样也会获取锁，进入方法。在上锁的时间上也要进行考虑。使用Redisson的话也可以不传入过期时间，Redisson有WatchDog机制，会触发自动续期。</p></blockquote> <p>至此一个积分功能就大体实现了。除了上述提到的功能还有积分项的过期任务，积分获取规则、过期规则、抵扣规则配置等需要实现。如果有其他方案，或者文中实现有问题，欢迎讨论和指出。</p></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">5/24/2023, 7:06:55 PM</span></div></footer> <!----> <!----> <!----></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/boke/assets/js/app.c3ffbfc1.js" defer></script><script src="/boke/assets/js/3.7e2ad150.js" defer></script><script src="/boke/assets/js/1.ea382386.js" defer></script><script src="/boke/assets/js/36.38aa9873.js" defer></script>
+  </body>
+</html>
